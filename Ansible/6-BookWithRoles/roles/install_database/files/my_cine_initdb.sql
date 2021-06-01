@@ -3,7 +3,7 @@
 -- TODO2: make template from this file to inject dbname,user,password
 
 -- create database
-create database dbmovie CHARACTER SET utf8;
+create database if not exists dbmovie CHARACTER SET utf8;
 
 -- create user with all privileges to database
 create user 'movie'@'*' identified by 'password';
