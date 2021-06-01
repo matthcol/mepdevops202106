@@ -1,0 +1,30 @@
+---
+- name: Deploy movie app
+  hosts: webservers
+  tasks:
+    - name: Create directory applications
+      file:
+        path: /applications
+        state: directory 
+        owner: srvadmin
+        group: srvadmin
+        mode: 0750
+    - name: Copy artifact
+      copy:
+        src: ~/RepoArtifacts/movieapp.jar
+        dest: /applications
+        owner: srvadmin
+        group: srvadmin
+        mode: 0600 
+
+- name: Deploy movie db
+  hosts: dbservers
+  tasks:
+    - name: install mariadb
+      yum:
+        name: mariadb-server
+        state: installed
+    - name: start service
+      systemd:
+        name: mariadb
+        state: started
