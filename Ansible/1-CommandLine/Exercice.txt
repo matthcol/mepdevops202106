@@ -1,0 +1,20 @@
+Exercices commandes copy et file:
+1. deployer movieapp.jar sur les noeuds webservers dans /tmp
+2. undeploy movieapp.jar
+3. Refaire la manip et faire en sorte que le fichier 
+	appartienne à srvadmin:srvadmin en mode 600
+4. Créer le répertoire de destination /applications
+	qui appartient à srvadmin:srvadmin en mode 750
+   Et refaire 1-3
+
+Rep 1.	
+ansible webservers -m copy -a "src=/home/srvadmin/RepoArtifacts/movieapp.jar dest=/tmp"
+Rep 2.
+ansible webservers -m file -a "path=/tmp/movieapp.jar state=absent"
+Rep 3.
+ansible webservers -m copy -a "src=/home/srvadmin/RepoArtifacts/movieapp.jar dest=/tmp owner=srvadmin group=srvadmin mode=600"
+Rep 4.
+ansible webservers -m file -a "path=/applications state=directory owner=srvadmin group=srvadmin mode=750"
+ansible webservers -m copy -a "src=/home/srvadmin/RepoArtifacts/movieapp.jar dest=/applications owner=srvadmin group=srvadmin mode=600"
+
+ 
