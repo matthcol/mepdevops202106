@@ -1,0 +1,14 @@
+ - name: Create directory applications
+   file:
+     path: "{{ appli_dir }}"
+     state: directory 
+     owner: "{{ owner_user }}"
+     group: "{{ owner_group }}"
+     mode: 0750
+ - name: Copy artifact
+   copy:
+     src: ~/RepoArtifacts/movieapp.jar
+     dest: "{{ appli_dir }}"
+     owner: "{{ owner_user }}"
+     group: "{{ owner_group }}"
+     mode: 0600 
