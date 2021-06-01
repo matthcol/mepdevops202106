@@ -3,6 +3,6 @@
   roles:
     - install_application
 
-#- hosts: dbservers
-#  roles:
-#    - install_database
+- hosts: dbservers
+  roles:
+    - install_database
