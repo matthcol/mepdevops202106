@@ -3,7 +3,7 @@
   hosts: webservers
   tasks:
     - name: Create directory /applications
-      ansible.builtin.file:
+      file:
         path: /applications
         state: directory 
         owner: srvadmin
