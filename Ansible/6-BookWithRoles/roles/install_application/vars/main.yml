@@ -1,0 +1,8 @@
+---
+owner_user: srvadmin
+owner_group: srvadmin
+db_host: 192.168.56.107
+db_port: 3306
+db_name: dbmovie
+db_user: movie
+db_password: password

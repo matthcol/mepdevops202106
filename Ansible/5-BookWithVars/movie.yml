@@ -1,0 +1,34 @@
+---
+- name: Deploy movie app
+  hosts: webservers
+  vars:
+    appli_dir: /applications
+    owner_user: srvadmin
+    owner_group: srvadmin
+  tasks:
+    - name: Create directory applications
+      file:
+        path: "{{ appli_dir }}"
+        state: directory 
+        owner: "{{ owner_user }}"
+        group: "{{ owner_group }}"
+        mode: 0750
+    - name: Copy artifact
+      copy:
+        src: ~/RepoArtifacts/movieapp.jar
+        dest: "{{ appli_dir }}"
+        owner: "{{ owner_user }}"
+        group: "{{ owner_group }}"
+        mode: 0600 
+
+- name: Deploy movie db
+  hosts: dbservers
+  tasks:
+    - name: install mariadb
+      yum:
+        name: mariadb-server
+        state: installed
+    - name: start service
+      systemd:
+        name: mariadb
+        state: started

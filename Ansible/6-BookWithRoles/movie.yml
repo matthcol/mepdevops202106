@@ -1,0 +1,8 @@
+---
+- hosts: webservers
+  roles:
+    - install_application
+
+- hosts: dbservers
+  roles:
+    - install_database
