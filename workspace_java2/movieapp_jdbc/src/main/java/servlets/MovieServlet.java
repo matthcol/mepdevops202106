@@ -45,16 +45,16 @@ public class MovieServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// read movie fields from form
+		request.setCharacterEncoding("UTF-8");
 		var title = request.getParameter("title");
 		var yearStr = request.getParameter("year");
-//		for (Map.Entry<String,String[]> p : request.getParameterMap().entrySet()) {
-//			System.out.println(p.getKey() + " : " + Arrays.toString(p.getValue()));
-//		}
-//		System.out.println("title read: " + title);
-//		System.out.println("year read: " + yearStr);
 		var year = Integer.parseInt(yearStr);
+		// create new object Movie
 		var movie = new Movie(title,year);
+		// store new Movie in Database
 		DbTools.addMovie(movie);
+		// go back to the list of movies with GET method 
 		doGet(request, response);
 	}
 
