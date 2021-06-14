@@ -1,0 +1,3 @@
+/subsystem=datasources/data-source=MovieappDS:write-attribute(name=connection-url,value=jdbc:postgresql://localhost:5432/dbmovie)
+/subsystem=datasources/data-source=MovieappDS:write-attribute(name=driver-name,value=postgresql-42.2.20.jar)
+reload

@@ -1,0 +1,3 @@
+/subsystem=datasources/data-source=MovieappDS:write-attribute(name=connection-url,value=jdbc:mariadb://localhost:3306/dbmovie)
+/subsystem=datasources/data-source=MovieappDS:write-attribute(name=driver-name,value=mariadb-java-client-2.7.2.jar)
+reload

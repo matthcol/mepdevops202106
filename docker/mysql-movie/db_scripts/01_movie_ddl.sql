@@ -1,7 +1,3 @@
-DROP TABLE if exists play;
-DROP TABLE if exists movies;
-DROP TABLE if exists stars;
-
 create table stars (
 	id integer auto_increment,
 	name varchar(150) not null,
