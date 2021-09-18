@@ -1,0 +1,9 @@
+# remote user on all hosts
+ansible_user: root
+# db settings for both app and db hosts
+db_editor: mariadb
+db_name: dbmovie
+db_host: "{{ groups['dbserver'][0] }}"
+db_port: 3306
+db_user: movie
+db_password: password

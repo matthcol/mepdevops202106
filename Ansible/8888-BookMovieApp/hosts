@@ -1,0 +1,8 @@
+# Inventory of this playbook
+#
+[webservers]
+192.168.56.107
+
+
+[dbserver]
+192.168.56.106

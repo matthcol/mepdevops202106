@@ -1,0 +1,44 @@
+---
+- name: Install NGinx
+  yum:
+    name: nginx
+    state: installed
+- name: Change NGinx default serveur
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/
+    owner: nginx
+    group: nginx
+    mode: 0750
+- name: Copy NGinx serveur conf
+  copy:
+    src: movieapp.conf
+    dest: /etc/nginx/conf.d/
+    owner: nginx
+    group: nginx
+    mode: 0750
+- name: Create HTML root dir
+  file:
+    path: /sites/movieapp
+    state: directory 
+    owner: nginx
+    group: nginx
+    mode: 0750
+- name: Stop Service Nginx
+  tags: deploy
+  systemd:
+    name: nginx
+    state: stopped
+- name: Copy artifact
+  tags: deploy
+  copy:
+    src: ~/RepoArtifacts/movie-app/
+    dest: /sites/movieapp/
+    owner: nginx
+    group: nginx
+    mode: 0640 
+- name: Start Service Nginx
+  tags: deploy
+  systemd:
+    name: nginx
+    state: started

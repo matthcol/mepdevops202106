@@ -1,0 +1,11 @@
+# same settings for all host in group webservers
+appli_name: movieapp
+appli_basedir: /applications
+appli_dir: "{{ appli_basedir }}/{{ appli_name }}"
+appli_artifact: "{{ appli_name }}.jar"
+appli_starter: "start_{{ appli_name }}.sh"
+db_editor: mariadb
+db_name: dbmovie
+db_host: "{{ groups['dbserver'][0] }}"
+db_user: movie
+db_password: password

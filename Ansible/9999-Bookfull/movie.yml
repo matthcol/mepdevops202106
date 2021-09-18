@@ -1,0 +1,11 @@
+---
+- hosts: webservers
+  tags: app
+  roles:
+    - install_application
+    - firewall
+
+- hosts: dbserver
+  tags: db
+  roles:
+    - install_database

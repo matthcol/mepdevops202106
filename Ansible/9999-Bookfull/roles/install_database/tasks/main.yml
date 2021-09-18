@@ -1,0 +1,20 @@
+---
+- name: install mariadb
+  yum:
+    name: mariadb-server
+    state: installed
+- name: start service
+  systemd:
+    name: mariadb
+    state: started
+- name: copy SQL scripts
+  copy:
+    src: "{{ item }}"
+    dest: /tmp
+  loop:
+    - my_cine_initdb.sql
+    - my_cine_ddl.sql
+- name: (re)create database
+  command: mysql -u root < my_cine_initdb.sql
+  args:
+    chdir: /tmp

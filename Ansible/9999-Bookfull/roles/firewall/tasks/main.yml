@@ -1,0 +1,24 @@
+---
+- name: package
+  yum:
+    name: ufw
+    state: installed
+- name: service
+  systemd:
+    name: ufw
+    state: started
+    enabled: yes
+- name: configure firewall
+  block:
+    - name: enable firewall
+      ufw:
+        state: enabled
+      ufw:
+        rule: allow
+        proto: tcp
+        interface_in: "{{ item.interface }}"
+        from_ip: "{{ item.from_ip }}"
+        from_port: "{{ item.from_port }}"
+      loop: {{ firewall_inputs }}
+
+

@@ -1,0 +1,6 @@
+---
+- name: Deploy movie app
+  hosts: webservers
+  tags: app
+  roles:
+    - front

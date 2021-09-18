@@ -1,0 +1,42 @@
+---
+- name: App OS User
+  user:
+    name: "{{ owner_user }}"
+    shell: /usr/bin/false
+    create_home: no
+    system: yes
+    state: present
+- name: Create directory applications
+  file:
+    path: "{{ appli_dir }}"
+    state: directory 
+    recurse: yes 
+    owner: "{{ owner_user }}"
+    group: "{{ owner_group }}"
+    mode: 0700
+- name: Deploy artifact
+  block:
+    - name: Copy artifact
+      copy:
+        src: "~/RepoArtifacts/{{ appli_artifact }}"
+        dest: "{{ appli_dir }}"
+        mode: '0600' 
+        owner: "{{ owner_user }}"
+        group: "{{ owner_group }}"
+    - name: Configuration and starter shell script
+      template:
+        src: "{{ item.src }}" 
+        dest: "{{ appli_dir }}/{{ item.dest }}"
+        mode: "{{ item.mode }}"
+        owner: "{{ owner_user }}"
+        group: "{{ owner_group }}"
+      loop:
+        - { src: application.properties.j2, dest: application.properties, mode: '0600' } 
+        - { src: start_app.j2, dest: "{{ appli_starter }}", mode: '0700' } 
+- name: Java Runtime Environment
+  yum:
+    name: "{{ item }}"
+    state: installed
+  loop:
+    - "java-{{ java_version }}-openjdk"
+    - ufw
